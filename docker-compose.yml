@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  proxy:
+    image: traefik:latest
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.http.address=:80"
+      - "--entrypoints.https.address=:443"
+      - "--certificatesresolvers.mydnschallenge.acme.dnschallenge=true"
+      - "--certificatesresolvers.mydnschallenge.acme.dnschallenge.provider=digitalocean"
+      - "--certificatesresolvers.mydnschallenge.acme.email=example@domain.com"
+      - "--certificatesresolvers.mydnschallenge.acme.storage=/acme.json"
+    environment:
+      - DO_AUTH_TOKEN=${DO_AUTH_TOKEN}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "6969:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./acme/acme.json:/acme.json
