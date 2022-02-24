@@ -24,13 +24,13 @@ This repository is a minimal setup for running your services with Docker (Compos
 > nano .env
 ```
 
-4. Get the service repo (e.g. `nextjs-tailwind-starter`)
+4. Get the service repo (e.g. `nextjs-tailwindcss`)
 
 ```bash
-> bash run/get-repo.sh nextjs-tailwind-starter
+> bash run/get-repo.sh nextjs-tailwindcss
 ```
 
-It will fetch the following repo `https://github.com/starters-dev/nextjs-tailwind-starter`
+It will fetch the following repo `https://github.com/starters-dev/nextjs-tailwindcss`
 
 5. Build and run
 

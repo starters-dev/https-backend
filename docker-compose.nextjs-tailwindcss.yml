@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  nextjs-tailwindcss:
+    build: ../nextjs-tailwindcss
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nextjs-tailwindcss.rule=Host(`nextjs-tailwindcss.${DOMAIN_NAME}`)"
+      - "traefik.http.routers.nextjs-tailwindcss.entryPoints=http"
+      - "traefik.http.routers.nextjs-tailwindcss.middlewares=https_redirect"
+      - "traefik.http.middlewares.https_redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.nextjs-tailwindcss_tls.rule=Host(`nextjs-tailwindcss.${DOMAIN_NAME}`)"
+      - "traefik.http.routers.nextjs-tailwindcss_tls.entryPoints=https"
+      - "traefik.http.routers.nextjs-tailwindcss_tls.tls.certresolver=mydnschallenge"
