@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  postgresql:
+    image: bitnami/postgresql:latest
+    restart: always
+    environment:
+      - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
+    volumes:
+      - ../data/postgresql:/bitnami/postgresql
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.postgresql.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.postgresql.entryPoints=postgresql"
+      - "traefik.tcp.routers.postgresql.service=postgresql"
+      # services (needed for TCP)
+      - "traefik.tcp.services.postgresql.loadbalancer.server.port=5432"
+      # doing https
+      - "traefik.http.routers.postgresql.tls.certresolver=mydnschallenge"
+      - "traefik.http.routers.postgresql.tls.domains[0].main=backend.${DOMAIN_NAME}"
+      - "traefik.http.routers.postgresql.tls.domains[0].sans=db.backend.${DOMAIN_NAME}"

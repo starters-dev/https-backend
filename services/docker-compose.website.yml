@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  website:
+    build: ./website
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.website.rule=Host(`backend.${DOMAIN_NAME}`)"
+      - "traefik.http.routers.website.entryPoints=http"
+      - "traefik.http.routers.website.middlewares=https_redirect"
+      - "traefik.http.middlewares.https_redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.website_tls.rule=Host(`backend.${DOMAIN_NAME}`)"
+      - "traefik.http.routers.website_tls.entryPoints=https"
+      - "traefik.http.routers.website_tls.tls.certresolver=mydnschallenge"
