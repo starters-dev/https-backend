@@ -78,7 +78,7 @@ You can always delete existing (if you don't need them) or add your own services
 
 - [PostgreSQL](https://www.postgresql.org) - open source object-relational database known for reliability and data integrity. It uses [Bitnami Docker image](https://hub.docker.com/r/bitnami/postgresql).
 - [Redis](https://redis.io) - open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker. It uses [Bitnami Docker image](https://hub.docker.com/r/bitnami/redis).
-- [React App](https://backend.starters.dev) - sample frontend app. It uses [backend.starters.dev-website](https://github.com/starters-dev/backend.starters.dev-website) repo
+- [React App](https://backend.starters.dev) - simple [frontend app](https://github.com/starters-dev/backend.starters.dev-website).
 
 > more services will be added...
 
