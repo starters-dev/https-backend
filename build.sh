@@ -1,7 +1,4 @@
-# -- running setup script
-bash run/setup.sh
-
-# -- getting all docker-compose files
+# -- getting docker-compose files
 DC_FILES="docker-compose.main.yml"
 for F in `find ./services -type f -maxdepth 1 -name "docker-compose*.yml"`
 do
