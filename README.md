@@ -54,6 +54,8 @@ It will setup everything, including https certificates, and will start Docker Co
 
 This setup is using [Traefik](https://github.com/traefik/traefik), the cloud native application proxy, that simplifies the process of getting `https` certificates and the way to describe services.
 
+You can always delete existing (if you don't need them) or add your own services by following the same structure.
+
 ### Services
 
 - [PostgreSQL](https://www.postgresql.org) - open source object-relational database known for reliability and data integrity. It uses [Bitnami Docker image](https://hub.docker.com/r/bitnami/postgresql).
@@ -70,29 +72,39 @@ Current setup requires you to fill in `.env` file with variables that are used i
 # [GENERAL]
 DOMAIN_NAME=your-website.com
 DO_AUTH_TOKEN=xxxxxxxxxxxxxxxxxxxxxx # for DNS challenge
-ACME_EMAIL=email@your-website.com    # for https certificates
+ACME_EMAIL=email@your-website.com    # for let's encrypt
 GITHUB_TOKEN=xxxxxxxxxxxxxxxxxxxxxx  # (optional) for private repos
-
-# [REDIS]
-REDIS_PASSWORD=
-REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
 
 # [POSTGRES]
 POSTGRESQL_USERNAME=admin
 POSTGRESQL_PASSWORD=123456qwerty
 POSTGRESQL_DATABASE=db
+
+# [REDIS]
+REDIS_PASSWORD=
+REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
 ```
 
-#### `DOMAIN_NAME`
+#### General
 
+- `DOMAIN_NAME` - your registered domain.
+- `DO_AUTH_TOKEN` - Digital Ocean token that is going to be used for DNS challenge and generating https certificates. It's required by Traefik and they provide other options, you can find them [here](https://doc.traefik.io/traefik/https/acme/#providers). If you'd like to continue with Digital Ocean, then you can create a token in `Dashboard` -> `API` -> `Tokens/Keys`.
+- `ACME_EMAIL` - email that is used for [Let's Encrypt](https://letsencrypt.org) and `https` certificates.
+- `GITHUB_TOKEN` - github token for private repos.
 
+#### PostreSQL
 
-## Tips
+- `POSTGRESQL_USERNAME` - username for PostgreSQL.
+- `POSTGRESQL_PASSWORD` - password for PostgreSQL.
+- `POSTGRESQL_DATABASE` - name of the database in PostgreSQL.
 
----
+#### Redis
 
-You can find example `env` file in the root folder.
+- `REDIS_PASSWORD` - password for Redis.
+- `REDIS_DISABLE_COMMANDS` - commands disabled from execution.
 
-`DO_AUTH_TOKEN` is used to generate https certificates against [DigitalOcean](https://digitalocean.com) challenge. You can generate one in the DO Networking dashboard or choose one of the [available providers](https://doc.traefik.io/traefik/https/acme/#providers).
+## Why?
 
----
+While developing `API` and similar services for mobile apps, you can not really access `localhost` (on mobile device) if, let's say, you have running Docker image on you local machine. Also you have to make only `https` requests from mobile app.
+
+Another reason was to have `PostgreSQL` and `Redis` always running in the cloud but for cheap cost. You can run both of them easily on less than $5 server. 
