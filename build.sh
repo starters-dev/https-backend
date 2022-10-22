@@ -9,6 +9,4 @@ do
 done
 
 # -- building containers
-# docker-compose $DC_FILES build && docker-compose $DC_FILES up -d
-
-echo $DC_FILES
+docker-compose $DC_FILES build && docker-compose $DC_FILES up -d

@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  frontend:
+    build: ./frontend
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`backend.${DOMAIN_NAME}`)"
+      - "traefik.http.routers.frontend.entryPoints=http"
+      - "traefik.http.routers.frontend.middlewares=https_redirect"
+      - "traefik.http.middlewares.https_redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.frontend_tls.rule=Host(`backend.${DOMAIN_NAME}`)"
+      - "traefik.http.routers.frontend_tls.entryPoints=https"
+      - "traefik.http.routers.frontend_tls.tls.certresolver=mydnschallenge"

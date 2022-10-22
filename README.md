@@ -44,7 +44,7 @@ Check [Environment variables](#environment-variables) section for more informati
 > Our example is based on [backend.starters.dev-website](https://github.com/starters-dev/backend.starters.dev-website) repo.
 
 ```bash
-> git clone https://github.com/starters-dev/backend.starters.dev-website services/website
+> git clone https://github.com/starters-dev/backend.starters.dev-website services/frontend
 ```
 
 5. Build and run
@@ -55,11 +55,23 @@ Check [Environment variables](#environment-variables) section for more informati
 
 It will setup everything, including https certificates, and will start Docker Compose services in the background.
 
+## Structure
+
+The folder structure is pretty simple but makes you reuse and write less boilerplate code.
+
+- `docker-compose.main.yml` - main Docker Compose file with DNS challence, ACME and ports configuration.
+- `build.sh` - `build` script that runs `setup` script with all scripts under `run/services` folder, builds and runs Docker images in background.
+- `.env` - list of environment variables.
+- `run/` - folder with general bash scripts.
+- `run/services/` - folder with bash scripts for a specific service.
+- `services/` - folder with Docker services files. For example, if you have `redis` service, then you would have `services/docker-compose.redis.yml` with specific configuration for `redis` service. Or if your service is a frontend app, then you'll need to clone it to `services/frontend/` and create `services/docker-compose.frontend.yml`.
+- `services/your-service/` - folder with your service, for ex. `frontend`.
+
 ## What's inside
 
-This setup is using [Traefik](https://github.com/traefik/traefik), the cloud native application proxy, that simplifies the process of getting `https` certificates and the way to describe services.
+The setup uses [Traefik](https://github.com/traefik/traefik), the cloud native application proxy, to simplify the process of getting `https` certificates and the way to describe services.
 
-You can always delete existing (if you don't need them) or add your own services by following the same structure.
+You can always delete existing (if you don't need them) or add your own services, just make sure to apply necessary changes.
 
 ### Services
 
