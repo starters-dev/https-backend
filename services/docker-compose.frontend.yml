@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   frontend:
-    build: ./frontend
+    build: ./services/frontend
     restart: always
     labels:
       - "traefik.enable=true"
