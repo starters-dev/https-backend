@@ -1,6 +1,7 @@
-# 🔐 Universal Backend
+# 🔐 Universal HTTPS Backend
 
 ![Traefik](https://img.shields.io/badge/Proxy-Traefik-skyblue)
+![HTTPS](https://img.shields.io/badge/HTTPS-Configured-green)
 ![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue)
 ![Redis](https://img.shields.io/badge/Cache-Redis-red)
 ![Website](https://img.shields.io/badge/Website-React%20App-blue)
@@ -15,7 +16,7 @@ Let's say, you have the `API` service (e.g. NodeJS app), React app for frontend 
 
 ### Quickstart
 
-1. Connect to the remote server
+1. Connect to your remote server
 
 ```bash
 > ssh root@IP_ADDRESS
@@ -30,10 +31,10 @@ Let's say, you have the `API` service (e.g. NodeJS app), React app for frontend 
 > cd backend
 ```
 
-3. Fill in `.env` file with your information
+3. Run `setup` script and fill in `env` variables
 
 ```bash
-> mv .env.example .env
+> bash setup.sh
 > nano .env
 ```
 
@@ -57,10 +58,10 @@ It will setup everything, including https certificates, and will start Docker Co
 
 ## Structure
 
-The folder structure is pretty simple but makes you reuse and write less boilerplate code.
+The folder structure is pretty simple but lets you reuse and write less boilerplate code.
 
 - `docker-compose.main.yml` - main Docker Compose file with DNS challence, ACME and ports configuration.
-- `build.sh` - `build` script that runs `setup` script with all scripts under `run/services` folder, builds and runs Docker images in background.
+- `build.sh` - `build` script that runs `setup` script with all scripts under `run/services` folder and builds and runs Docker images in background.
 - `.env` - list of environment variables.
 - `run/` - folder with general bash scripts.
 - `run/services/` - folder with bash scripts for a specific service.
@@ -125,3 +126,7 @@ REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
 While developing `API` and similar services for mobile apps, you can not really access `localhost` (on mobile device) if, let's say, you have running Docker image on you local machine. Also you have to make only `https` requests from mobile app.
 
 Another reason was to have `PostgreSQL` and `Redis` always running in the cloud but for cheap cost. You can run both of them easily on less than $5 server.
+
+#### Note
+
+This backend setup is a great fit if you just want to start writing business logic without messing with DevOps and spending a few days on that what's already has been done for you. It can be used for development and early production stages (of course, depends on your project), however, it's strongly **recommended** to have services like `PostgreSQL`, `Redis`, and similar to be seperated and independent on production stage.
