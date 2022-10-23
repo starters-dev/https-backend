@@ -67,7 +67,7 @@ If you'd like to add your own service, then you should follow the steps below to
 
 2. `(optional)` Add service's folder `services/YOUR_SERVICE`. For example, if you are going to store some data or configuration files only related to that service.
 
-3. `(optional)` Add service's script file `run/services/YOUR_SERVICE.sh`. For example, if you need to craete some folders in advance on `setup` step.
+3. `(optional)` Add service's script file `services/YOUR_SERVICE/index.sh`. For example, if you need to craete some folders in advance on `setup` step.
 
 ### Service deletion
 
@@ -87,7 +87,6 @@ The folder structure is pretty simple but lets you reuse and write less boilerpl
 - `build.sh` - `build` script that runs `setup` script with all scripts under `run/services` folder and builds and runs Docker images in background.
 - `.env` - list of environment variables.
 - `run/` - folder with general bash scripts.
-- `run/services/` - folder with bash scripts for a specific service.
 - `services/` - folder with Docker services files. For example, if you have `redis` service, then you would have `services/docker-compose.redis.yml` with specific configuration for `redis` service. Or if your service is a frontend app, then you'll need to clone it to `services/frontend/` and create `services/docker-compose.frontend.yml`.
 - `services/your-service/` - folder with your service, for ex. `frontend`.
 
