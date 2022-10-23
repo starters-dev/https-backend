@@ -9,16 +9,20 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.http.address=:80"
       - "--entrypoints.https.address=:443"
+      - "--entrypoints.postgresql.address=:5432" # PostgreSQL entry point
+      - "--entrypoints.redis.address=:6379" # Redis entry point
       - "--certificatesresolvers.mydnschallenge.acme.dnschallenge=true"
       - "--certificatesresolvers.mydnschallenge.acme.dnschallenge.provider=digitalocean"
-      - "--certificatesresolvers.mydnschallenge.acme.email=example@domain.com"
+      - "--certificatesresolvers.mydnschallenge.acme.email=${ACME_EMAIL}"
       - "--certificatesresolvers.mydnschallenge.acme.storage=/acme.json"
     environment:
       - DO_AUTH_TOKEN=${DO_AUTH_TOKEN}
     ports:
       - "80:80"
       - "443:443"
-      - "6969:8080"
+      - "6969:8080" # Traefik dashboard
+      - "5432:5432" # PostgreSQL port
+      - "6379:6379" # Redis port
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./acme/acme.json:/acme.json

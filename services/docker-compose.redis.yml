@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  redis:
+    image: bitnami/redis:latest
+    restart: always
+    env_file:
+      - ./services/redis/conf.env
+    volumes:
+      - ./services/redis/data:/bitnami/redis/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.redis.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.redis.entryPoints=redis"
+      - "traefik.tcp.routers.redis.service=redis"
+      # services (needed for TCP)
+      - "traefik.tcp.services.redis.loadbalancer.server.port=6379"
+      # doing https
+      - "traefik.http.routers.redis.tls.certresolver=mydnschallenge"
+      - "traefik.http.routers.redis.tls.domains[0].main=backend.${DOMAIN_NAME}"
+      - "traefik.http.routers.redis.tls.domains[0].sans=redis.backend.${DOMAIN_NAME}"

@@ -1,3 +1,4 @@
+# `acme/acme.json` file for storing https certificates
 DIR=acme
 FILE=acme/acme.json
 
@@ -7,5 +8,6 @@ fi
 
 if [ ! -f "$FILE" ]; then
   touch "$FILE"
-  chmod 600 "$FILE"
 fi
+
+chmod 600 "$FILE"
