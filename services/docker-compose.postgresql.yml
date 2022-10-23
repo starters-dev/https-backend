@@ -9,7 +9,7 @@ services:
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
       - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
     volumes:
-      - ./data/postgresql:/bitnami/postgresql
+      - ./services/postgresql/data:/bitnami/postgresql
     labels:
       - "traefik.enable=true"
       - "traefik.tcp.routers.postgresql.rule=HostSNI(`*`)"
