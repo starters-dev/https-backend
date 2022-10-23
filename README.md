@@ -131,6 +131,9 @@ There are still some things I would like to add to the backend setup:
 - [x] [Redis](https://redis.io) - open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.
 - [ ] [Plausible](https://plausible.io) - simple and privacy-friendly Google Analytics alternative.
 - [ ] [GlitchTip](https://glitchtip.com) - open source reimplementation of Sentry error tracking platform.
+- [ ] [Mattermost](https://mattermost.com) - open source platform for developer collaboration. [Github repo](https://github.com/starters-dev/mattermost).
+- [ ] [Taiga](https://www.taiga.io) - open source, self-hosted project management tool. [Github repo](https://github.com/starters-dev/taiga).
+- [ ] [Focalboard](https://focalboard.com) - open source, self-hosted alternative to Trello, Notion, and Asana. [Github repo](https://github.com/starters-dev/focalboard).
 - [ ] Github actions or similar technique
 
 ## Why?
