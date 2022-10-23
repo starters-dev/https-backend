@@ -58,6 +58,26 @@ Check [Environment variables](#environment-variables) section for more informati
 
 It will setup everything, including https certificates, and will start Docker Compose services in the background.
 
+### Service creation
+
+If you'd like to add your own service, then you should follow the steps below to keep the same structure:
+
+1. Add service's Docker Compose file `services/docker-compose.YOUR_SERVICE.yml`.
+
+2. `(optional)` Add service's folder `services/YOUR_SERVICE`. For example, if you are going to store some data or configuration files only related to that service.
+
+3. `(optional)` Add service's script file `run/services/YOUR_SERVICE.sh`. For example, if you need to craete some folders in advance on `setup` step.
+
+### Service deletion
+
+If you don't need a service, you can easily delete it by running:
+
+```bash
+> bash run/sdel.sh SERVICE_NAME
+```
+
+For example, if you don't need `postgresql` service, you will run `bash run/sdel.sh postgresql` and it will delete related files.
+
 ## Structure
 
 The folder structure is pretty simple but lets you reuse and write less boilerplate code.
@@ -88,40 +108,29 @@ You can always delete existing (if you don't need them) or add your own services
 
 Current setup requires you to fill in `.env` file with variables that are used in services.
 
-```
-# [GENERAL]
-DOMAIN_NAME=your-website.com
-DO_AUTH_TOKEN=xxxxxxxxxxxxxxxxxxxxxx # for DNS challenge
-ACME_EMAIL=email@your-website.com    # for let's encrypt
-GITHUB_TOKEN=xxxxxxxxxxxxxxxxxxxxxx  # (optional) for private repos
-
-# [POSTGRES]
-POSTGRESQL_USERNAME=admin
-POSTGRESQL_PASSWORD=123456qwerty
-POSTGRESQL_DATABASE=db
-
-# [REDIS]
-REDIS_PASSWORD=
-REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
-```
-
 #### General
 
 - `DOMAIN_NAME` - your registered domain.
 - `DO_AUTH_TOKEN` - Digital Ocean token that is going to be used for DNS challenge and generating https certificates. It's required by Traefik and they provide other options, you can find them [here](https://doc.traefik.io/traefik/https/acme/#providers). If you'd like to continue with Digital Ocean, then you can create a token in `Dashboard` -> `API` -> `Tokens/Keys`.
 - `ACME_EMAIL` - email that is used for [Let's Encrypt](https://letsencrypt.org) and `https` certificates.
-- `GITHUB_TOKEN` - github token for private repos.
+- `GITHUB_TOKEN` - `(optional)` github token for private repos.
 
-#### PostreSQL
+<details>
+<summary>PostgreSQL</summary>
 
 - `POSTGRESQL_USERNAME` - username for PostgreSQL.
 - `POSTGRESQL_PASSWORD` - password for PostgreSQL.
 - `POSTGRESQL_DATABASE` - name of the database in PostgreSQL.
 
-#### Redis
+</details>
+
+<details>
+<summary>Redis</summary>
 
 - `REDIS_PASSWORD` - password for Redis.
 - `REDIS_DISABLE_COMMANDS` - commands disabled from execution.
+
+</details>
 
 ## Enhancements
 
