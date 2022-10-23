@@ -5,6 +5,8 @@ services:
   mail:
     image: bytemark/smtp
     restart: always
+    labels:
+      - "traefik.enable=false"
 
   plausible_db:
     image: postgres:14-alpine
@@ -12,7 +14,7 @@ services:
     volumes:
       - ./services/plausible/data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=${PLAUSIBLE_POSTGRES_PASSWORD}
+      - POSTGRES_PASSWORD=postgres
     labels:
       - "traefik.enable=false"
 
@@ -38,8 +40,8 @@ services:
       - plausible_db
       - plausible_events_db
       - mail
-    # ports:
-    #   - 8000:8000
+    expose:
+      - 8000
     env_file:
       - ./services/plausible/conf.env
     labels:
@@ -51,7 +53,6 @@ services:
       - "traefik.http.routers.plausible_tls.rule=Host(`plausible.${DOMAIN_NAME}`)"
       - "traefik.http.routers.plausible_tls.entryPoints=https"
       - "traefik.http.routers.plausible_tls.tls.certresolver=mydnschallenge"
-      - "traefik.http.services.plausible.loadbalancer.server.port=8000"
 
 volumes:
   db-data:

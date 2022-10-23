@@ -1,5 +1,5 @@
 # -- getting docker-compose files
-DC_FILES="-f docker-compose.main.yml"
+DC_FILES="-f docker-compose.yml"
 for F in `find ./services -maxdepth 1 -type f -name "docker-compose*.yml"`
 do
   DC_FILES="$DC_FILES -f $F "

@@ -96,27 +96,21 @@ The setup uses [Traefik](https://github.com/traefik/traefik), the cloud native a
 
 You can always delete existing (if you don't need them) or add your own services, just make sure to apply necessary changes.
 
-### Services
-
-- [PostgreSQL](https://www.postgresql.org) - open source object-relational database known for reliability and data integrity. It uses [Bitnami Docker image](https://hub.docker.com/r/bitnami/postgresql).
-- [Redis](https://redis.io) - open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker. It uses [Bitnami Docker image](https://hub.docker.com/r/bitnami/redis).
-- [React App](https://backend.starters.dev) - simple [frontend app](https://github.com/starters-dev/backend.starters.dev-website).
-
-> more services will be added...
-
-## Environment variables
+### Env variables
 
 Current setup requires you to fill in `.env` file with variables that are used in services.
-
-#### General
 
 - `DOMAIN_NAME` - your registered domain.
 - `DO_AUTH_TOKEN` - Digital Ocean token that is going to be used for DNS challenge and generating https certificates. It's required by Traefik and they provide other options, you can find them [here](https://doc.traefik.io/traefik/https/acme/#providers). If you'd like to continue with Digital Ocean, then you can create a token in `Dashboard` -> `API` -> `Tokens/Keys`.
 - `ACME_EMAIL` - email that is used for [Let's Encrypt](https://letsencrypt.org) and `https` certificates.
 - `GITHUB_TOKEN` - `(optional)` github token for private repos.
 
+### Services
+
+- [PostgreSQL](https://www.postgresql.org) - open source object-relational database known for reliability and data integrity. It uses [Bitnami Docker image](https://hub.docker.com/r/bitnami/postgresql).
+
 <details>
-<summary>PostgreSQL</summary>
+<summary>Env variables</summary>
 
 - `POSTGRESQL_USERNAME` - username for PostgreSQL.
 - `POSTGRESQL_PASSWORD` - password for PostgreSQL.
@@ -124,16 +118,20 @@ Current setup requires you to fill in `.env` file with variables that are used i
 
 </details>
 
+- [Redis](https://redis.io) - open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker. It uses [Bitnami Docker image](https://hub.docker.com/r/bitnami/redis).
+
 <details>
-<summary>Redis</summary>
+<summary>Env variables</summary>
 
 - `REDIS_PASSWORD` - password for Redis.
 - `REDIS_DISABLE_COMMANDS` - commands disabled from execution.
 
 </details>
 
+- [Plausible](https://plausible.io) - simple and privacy-friendly Google Analytics alternative
+
 <details>
-<summary>Plausible</summary>
+<summary>Env variables</summary>
 
 `.env` file:
 
@@ -151,14 +149,26 @@ Current setup requires you to fill in `.env` file with variables that are used i
 
 </details>
 
+<details>
+<summary>Troubleshooting</summary>
+
+- [ClickHouse] _Database plausible_events_db doesn't exist_. If you encounter this issue, check out [this comment](https://github.com/plausible/hosting/issues/49#issuecomment-1229183219) for the solution.
+
+</details>
+
+- [React App](https://backend.starters.dev) - simple [frontend app](https://github.com/starters-dev/backend.starters.dev-website).
+
+> more services will be added...
+
 ## Enhancements
 
 There are still some things I would like to add to the backend setup:
 
 - [x] [PostgreSQL](https://www.postgresql.org) - open source object-relational database known for reliability and data integrity.
 - [x] [Redis](https://redis.io) - open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.
-- [ ] [Plausible](https://plausible.io) - simple and privacy-friendly Google Analytics alternative. [Github repo](https://github.com/plausible/hosting).
+- [x] [Plausible](https://plausible.io) - simple and privacy-friendly Google Analytics alternative.
 - [ ] [GlitchTip](https://glitchtip.com) - open source reimplementation of Sentry error tracking platform.
+- [ ] [Cal.com](https://cal.com) - scheduling infrastructure for absolutely everyone. [Github repo](https://github.com/calcom/docker).
 - [ ] [Mattermost](https://mattermost.com) - open source platform for developer collaboration. [Github repo](https://github.com/starters-dev/mattermost).
 - [ ] [Taiga](https://www.taiga.io) - open source, self-hosted project management tool. [Github repo](https://github.com/starters-dev/taiga).
 - [ ] [Focalboard](https://focalboard.com) - open source, self-hosted alternative to Trello, Notion, and Asana. [Github repo](https://github.com/starters-dev/focalboard).

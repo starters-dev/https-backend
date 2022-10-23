@@ -1,5 +1,5 @@
 # -- running services' bash files
-BASH_GENERAL_FILES="bash run/acme.sh; bash run/data.sh;"
+BASH_GENERAL_FILES="bash run/acme.sh;"
 BASH_FILES=""
 for F in `find ./services -maxdepth 2 -type f -name "index.sh"`
 do
