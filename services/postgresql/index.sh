@@ -1,5 +1,7 @@
-# -- creating folder for Redis service
-DIR=services/redis
+SNAME=postgresql
+
+# -- creating folder for PostgreSQL service
+DIR=services/$SNAME
 if [ ! -d "$DIR" ]; then
   mkdir $DIR
 fi

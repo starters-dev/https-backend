@@ -11,9 +11,3 @@ SDC=services/docker-compose.$SNAME.yml
 if [ -f "$SDC" ]; then
   rm -rf $SDC
 fi
-
-# -- deleting script
-SSH=run/services/$SNAME.sh
-if [ -f "$SSH" ]; then
-  rm -rf $SSH
-fi 
