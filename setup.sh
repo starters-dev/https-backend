@@ -8,4 +8,7 @@ done
 eval "$BASH_SYSTEM_FILES $BASH_FILES"
 
 # -- .env.example -> .env
-mv .env.example .env
+ENVEXF=.env.example
+if [ -f "$ENVEXF" ]; then
+  mv .env.example .env
+fi
