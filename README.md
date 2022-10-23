@@ -153,13 +153,13 @@ It uses [Bitnami Docker image](https://hub.docker.com/r/bitnami/redis).
 
 </details>
 
----
-
-[React App](https://backend.starters.dev) - simple [frontend app](https://github.com/starters-dev/backend.starters.dev-website).
+> If you use [Plausible](https://github.com/plausible) in production, consider [sponsoring](https://github.com/sponsors/plausible) them.
 
 ---
 
-> more services will be added...
+[Frontend app](https://backend.starters.dev) - simple [Remix (React) app](https://github.com/starters-dev/backend.starters.dev-website).
+
+---
 
 ### Env variables
 
