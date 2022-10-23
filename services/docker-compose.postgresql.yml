@@ -4,10 +4,8 @@ services:
   postgresql:
     image: bitnami/postgresql:latest
     restart: always
-    environment:
-      - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
-      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
+    env_file:
+      - ./services/postgresql/conf.env
     volumes:
       - ./services/postgresql/data:/bitnami/postgresql
     labels:

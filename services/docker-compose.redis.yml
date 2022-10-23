@@ -4,9 +4,8 @@ services:
   redis:
     image: bitnami/redis:latest
     restart: always
-    environment:
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
-      - REDIS_DISABLE_COMMANDS=${REDIS_DISABLE_COMMANDS}
+    env_file:
+      - ./services/redis/conf.env
     volumes:
       - ./services/redis/data:/bitnami/redis/data
     labels:
