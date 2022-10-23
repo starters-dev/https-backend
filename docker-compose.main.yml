@@ -9,6 +9,8 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.http.address=:80"
       - "--entrypoints.https.address=:443"
+      - "--entrypoints.postgresql.address=:5432" # PostgreSQL entry point
+      - "--entrypoints.redis.address=:6379" # Redis entry point
       - "--certificatesresolvers.mydnschallenge.acme.dnschallenge=true"
       - "--certificatesresolvers.mydnschallenge.acme.dnschallenge.provider=digitalocean"
       - "--certificatesresolvers.mydnschallenge.acme.email=${ACME_EMAIL}"
