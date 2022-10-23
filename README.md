@@ -130,6 +130,8 @@ Current setup requires you to fill in `.env` file with variables that are used i
 
 - [Plausible](https://plausible.io) - simple and privacy-friendly Google Analytics alternative
 
+> [Official docs](https://plausible.io/docs/self-hosting).
+
 <details>
 <summary>Env variables</summary>
 
@@ -144,8 +146,6 @@ Current setup requires you to fill in `.env` file with variables that are used i
 - `ADMIN_USER_EMAIL` - admin email.
 - `ADMIN_USER_NAME` - admin usenamename.
 - `ADMIN_USER_PWD` - admin password.
-
-> [Original docs](https://plausible.io/docs/self-hosting).
 
 </details>
 
